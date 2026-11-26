@@ -1,7 +1,264 @@
----
-layout: default
-title: Pagetitle!
----
-<p>This is the index page.</p>
-<p><a href="kittens.html">To the kittens!!1!</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zhao Zhihao</title>
+<meta name="description" content="Zhao Zhihao, Computer Science undergraduate at the National University of Singapore working on AI safety and LLM post-training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one 720px reading column; a mono date/label gutter on the left of
+   every list row so news, research and experience share the same two-column rhythm. */
+:root {
+  color-scheme: light;
+  --paper: #ffffff;
+  --surface: #f3f5f4;
+  --ink: #16211e;
+  --muted: #5a6865;
+  --rule: #e1e5e3;
+  --accent: #0f6b5c;
+  --todo: #9a5b00;
+  --font-display: "Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+/* Top nav */
+.nav { border-bottom: 1px solid var(--rule); }
+.nav .wrap {
+  display: flex; flex-wrap: wrap; gap: 6px 22px;
+  align-items: baseline; justify-content: space-between;
+  padding-top: 14px; padding-bottom: 14px;
+}
+.nav .site { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink); }
+.nav ul { display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { font-family: var(--font-mono); font-size: 15px; color: var(--muted); }
+.nav ul a:hover { color: var(--accent); }
+
+/* Header */
+.intro { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; padding: 48px 0 8px; }
+.avatar {
+  width: 132px; height: 132px; flex: none; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--rule);
+  display: grid; place-items: center; overflow: hidden;
+  font-family: var(--font-display); font-size: 44px; color: var(--accent);
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.intro .who { flex: 1 1 280px; min-width: 0; }
+h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 38px; line-height: 1.1; margin: 0 0 6px; letter-spacing: -0.01em;
+}
+.role { margin: 0; color: var(--muted); }
+.email { margin: 6px 0 0; font-family: var(--font-mono); font-size: 16px; }
+
+.bio { margin: 24px 0 0; }
+.bio p { margin: 0 0 14px; }
+
+.links { display: flex; flex-wrap: wrap; gap: 8px 10px; list-style: none; padding: 0; margin: 20px 0 0; }
+.links a {
+  display: inline-block; padding: 5px 12px;
+  border: 1px solid var(--rule); border-radius: 999px;
+  font-family: var(--font-mono); font-size: 15px; color: var(--ink);
+}
+.links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+/* Sections */
+section { padding: 40px 0 0; }
+h2 {
+  font-family: var(--font-display); font-weight: 600; font-size: 24px;
+  margin: 0 0 18px; padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+  text-wrap: balance;
+}
+
+/* Shared two-column rows */
+.rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.rows > li { display: grid; grid-template-columns: 104px 1fr; gap: 18px; }
+.when {
+  font-family: var(--font-mono); font-size: 15px; color: var(--muted);
+  font-variant-numeric: tabular-nums; padding-top: 3px;
+}
+.rows.research { gap: 28px; }
+.rows h3 { font-family: var(--font-body); font-weight: 600; font-size: 17px; line-height: 1.35; margin: 0 0 4px; text-wrap: balance; }
+.meta { margin: 0 0 6px; color: var(--muted); font-size: 14.5px; }
+.rows p { margin: 0; }
+.rows p + p { margin-top: 6px; }
+.tag {
+  display: inline-block; margin-top: 6px; padding: 1px 8px;
+  background: var(--surface); border-radius: 4px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+  line-height: 1.6;
+}
+.todo { color: var(--todo); border-bottom: 1px dashed var(--todo); }
+
+footer {
+  margin-top: 56px; border-top: 1px solid var(--rule);
+  padding: 20px 0 40px; color: var(--muted); font-size: 14px;
+}
+footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+
+@media (max-width: 520px) {
+  h1 { font-size: 33px; }
+  .intro { padding-top: 32px; gap: 18px; }
+  .avatar { width: 96px; height: 96px; font-size: 32px; }
+  .rows > li { grid-template-columns: 1fr; gap: 2px; }
+  .tag { margin-top: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="site" href="#top">Zhao Zhihao</a>
+    <ul>
+      <li><a href="#news">news</a></li>
+      <li><a href="#research">research</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#honors">honors</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <header class="intro">
+    <!-- PHOTO: put photo.jpg next to this file, then replace the two letters below with
+         <img src="photo.jpg" alt="Zhao Zhihao"> -->
+    <div class="avatar" aria-hidden="true">ZZ</div>
+    <div class="who">
+      <h1>Zhao Zhihao</h1>
+      <p class="role">Computer Science, National University of Singapore</p>
+      <p class="email"><span class="todo">your.email@u.nus.edu</span></p>
+    </div>
+  </header>
+
+  <div class="bio">
+    <p>I am a final-year Computer Science undergraduate at the National University of Singapore, with a minor in mathematics. I work on AI safety. My current research, advised by <a href="https://www.comp.nus.edu.sg/~kanmy/">Prof. Min-Yen Kan</a>, studies what happens to self-evolving agents in the domains their improvement signal does not measure, safety included. Before that I studied scaling laws for LLM post-training with Prof. Bryan Low.</p>
+    <p>I want to understand intelligence by building and taking apart artificial systems, and I am uneasy that we deploy models we can neither fully explain nor control. That keeps me close to alignment, interpretability and the training pipeline itself.</p>
+    <p>I am applying to Master's programmes for Fall 2027 and am open to research internships.</p>
+  </div>
+
+  <!-- LINKS: replace each # with your real URL; delete any you don't have. -->
+  <ul class="links">
+    <li><a href="#"><span class="todo">CV</span></a></li>
+    <li><a href="#"><span class="todo">GitHub</span></a></li>
+    <li><a href="#"><span class="todo">LinkedIn</span></a></li>
+    <li><a href="#"><span class="todo">Google Scholar</span></a></li>
+  </ul>
+
+  <section id="news">
+    <h2>News</h2>
+    <ul class="rows">
+      <li><span class="when">2026/11</span><p>Started a project on whether a user's emotional tone changes how often coding models cheat on impossible tasks.</p></li>
+      <li><span class="when">2026/09</span><p>Joined the TARA AI safety fellowship (APAC cohort).</p></li>
+      <li><span class="when">2026/07</span><p>Began my final-year project on the safety of self-evolving agents in Prof. Min-Yen Kan's group.</p></li>
+      <li><span class="when">2026/05</span><p>Finished my undergraduate research project on post-training scaling laws. Dean's List for the semester.</p></li>
+    </ul>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <ul class="rows research">
+      <li>
+        <div class="when">2026/07 – now<br><span class="tag">agent safety</span></div>
+        <div>
+          <h3>What self-evolving agents lose while they improve</h3>
+          <p class="meta">Final-year project, NUS · Advisor: Prof. Min-Yen Kan</p>
+          <p>A self-evolving agent improves against a reward or judge that sees only part of its behaviour. I evaluate training-based self-evolving systems, including AZR and SPIRAL, across reasoning, knowledge, instruction following and safety to find what shifts outside that signal. So far, reasoning gains carry over to neighbouring domains while safety tends to degrade.</p>
+          <p>I am now testing whether rewards drawn from several domains at once can make self-improvement hold across all of them.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">2026/09 – now<br><span class="tag">reward hacking</span></div>
+        <div>
+          <h3>Angry or Excited Agents: Do Emotional Contexts Drive Misaligned Actions?</h3>
+          <p class="meta">TARA fellowship group project</p>
+          <p>We test whether a neutral, angry or excited user changes how often a model cheats or falsely reports success on impossible coding tasks from ImpossibleBench, and read out emotion directions from the activations of an open-weight model while it works.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">2025 – 2026/05<br><span class="tag">post-training</span></div>
+        <div>
+          <h3>Conditional scaling laws for LLM post-training</h3>
+          <p class="meta">Undergraduate research (UROP), NUS · Advisor: Prof. Bryan Low</p>
+          <p>How should a fixed data budget be split between supervised fine-tuning and DPO? Across 144 training runs on Llama-3.2 1B and 3B, evaluated on IFEval, MMLU and math, no single scaling law held across domains. The two stages interact non-additively: they cooperate at 3B and compete at 1B.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">2025<br><span class="tag">zk + ml</span></div>
+        <div>
+          <h3>Zero-knowledge data attribution for CLIP models</h3>
+          <p class="meta">Summer project</p>
+          <p>Designed a SNARK-based framework that attributes the outputs of image and text models to training data without revealing the underlying dataset.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="experience">
+    <h2>Experience and teaching</h2>
+    <ul class="rows">
+      <li>
+        <span class="when">2025 – now</span>
+        <div>
+          <h3>Technical workshop lead, NUS AI Alignment Initiative</h3>
+          <p>I run the technical workshop series, supported by the Singapore AI Safety Hub: sessions on model architecture, the LLM training pipeline and agentic safety. I also built the hands-on post-training session for the Technical AI Safety Fellowship.</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">2026/09 – 12</span>
+        <div>
+          <h3>Fellow, TARA</h3>
+          <p>Technical AI safety programme for the Asia-Pacific region.</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">2024</span>
+        <div>
+          <h3>AI engineering intern, <span class="todo">company name</span></h3>
+          <p>Built an agentic workflow that finds and corrects capitalisation errors in speech-to-text output, a task that needed context rather than string matching.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="honors">
+    <h2>Honors and activities</h2>
+    <ul class="rows">
+      <li><span class="when">2026</span><p>Dean's List, NUS School of Computing (AY2025/26 Semester 2)</p></li>
+      <li><span class="when">2026</span><p>Cyber Defenders Discovery Camp (CDDC) CTF: forensics, ML model inversion and RAG exploitation challenges</p></li>
+      <li><span class="when"><span class="todo">year</span></span><p>Singapore Ministry of Education scholarship</p></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Away from research: photography, music production and the gym.</span>
+    <span>Updated November 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
